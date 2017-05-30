@@ -22,46 +22,38 @@ public class MovieDatabase
         movieArray = new Movie[logicalSize]; //Java can have [0], but it's a no item. We have to init it with "1" to start. 
     } 
     
-    //This function is used in lieu of reading a future array length
+    //This function is used for public access
     public int getLogicalSize()
     {
         return logicalSize;
     }
     
-    
-    public void debugPrint(String debugString)
-    {
-        System.out.println("|DEBUG~$: " + debugString);
-    }
 
-    
     //chrisCopy2implimentation from Lecture 9
+    //Takes the 'references' of 2arrays, where array1 is [x]elements, and array2 is [x+1]elements, and the +1 movie is also attached. 
     private void chrisCopy2implimentation(Movie array1[], Movie array2[], Movie newMovie)
     {
-      //Movie[] returnArray = new Movie[array1.length+1];
-      //debugPrint("Array1Length: " + Integer.toString(array1.length));
-      for(int i=0; i< logicalSize; i++)//array1.length; i++)
+      for(int i=0; i< logicalSize; i++)
       {
-        array2[i] = array1[i];
-        //debugPrint("Loop count: " + Integer.toString(i) + " Name:" + array2[i].getName()+ " Name2:" + array1[i].getName());
+        array2[i] = array1[i]; //copy sequentially
       }
-      array2[logicalSize] = newMovie;
-      //debugPrint("Loop count END Name:" + array2[array1.length].getName());
+      array2[logicalSize] = newMovie; //add the new on at the end.
     }
 
     //Methods for getting/setting our private movies in the MovieDatabase
     //------------------------------------------------------------------------------------------
-   public void addMovie(Movie newMovie)//,int movieNumber)
+   //addMovie adds a new movie, and handles the dynamic nature our our movieArray.
+   public void addMovie(Movie newMovie)
    {
       //adds to array
-      Movie tempMovies[] = new Movie[logicalSize+1];
-      chrisCopy2implimentation(movieArray,tempMovies,newMovie);
-      movieArray = tempMovies;
-      System.out.println("|> " + newMovie.getName() + " added!");
+      Movie tempMovies[] = new Movie[logicalSize+1];  //make new array
+      chrisCopy2implimentation(movieArray,tempMovies,newMovie); //copy into it
+      movieArray = tempMovies;  //make the new one our movieArray
+      System.out.println("|> " + newMovie.getName() + " added!"); 
       logicalSize++;
-       debugPrint("LogiSize= " + Integer.toString(logicalSize));
     }   
     
+    //gets movies if the request is valid. Otherwise, returns an error.
    public Movie getMovie(int movieNumber)
    {
       if (movieNumber > logicalSize -1)
@@ -81,6 +73,7 @@ public class MovieDatabase
       movieArray[index] = tempMovie;
    }
     
+    //used to get the movie index from a movie name string (used as our UID in this situation)
     public int getMovieNumber(String movieName)
    {
      for (int i = 0; i < getLogicalSize(); i++)
@@ -95,46 +88,47 @@ public class MovieDatabase
     
  
 
-    //method to search our 4 movies by director name
-    public String getMovieByDirector(String movieDirector)
+  //method to search our movies by director name
+  public String getMovieByDirector(String movieDirector)
+  {
+  //catch non-ints
+  String stringToPrint = "";
+  for (int i = 0; i < getLogicalSize(); i++) 
+  {
+
+    if (movieArray[i].getDirector().equalsIgnoreCase(movieDirector))
+    {
+        stringToPrint += "|> " + movieArray[i].getName() + "\n";
+    }
+
+  }
+  //no director, moving on
+  if (stringToPrint.equals("")) {stringToPrint = "|>> Director not found.";}
+   else 
    {
-       //catch non-ints
-       String stringToPrint = "";
-       for (int i = 0; i < getLogicalSize(); i++) 
-       {
-
-            if (movieArray[i].getDirector().equalsIgnoreCase(movieDirector))
-            {
-                stringToPrint += "|> " + movieArray[i].getName() + "\n";
-            }
-
-        }
-   
-       if (stringToPrint.equals("")) {stringToPrint = "|>> Director not found.";}
-           else 
-           {
-               String tempstring = stringToPrint;
-               stringToPrint = "|>> Director found! \n" + movieDirector + " has directed these movies: \n" + tempstring;
-           }
-       return stringToPrint;
+       String tempstring = stringToPrint;
+       stringToPrint = "|>> Director found! \n" + movieDirector + " has directed these movies: \n" + tempstring;
    }
- //method to search our 4 movies by director name
-    public String getMovieByRuntime(float tempRuntime)
-   {
-    String stringToPrint = "";
-       for (int i = 0; i < getLogicalSize(); i++) 
-       {
+  return stringToPrint;
+  }
 
-            if (movieArray[i].getDuration() <= tempRuntime)
-            {
-                stringToPrint += "|> Movie title: " + movieArray[i].getName() +  " - Duration: " + Float.toString(movieArray[i].getDuration()) + "\n";
-            }
+  //method to search our 4 movies by director name
+  public String getMovieByRuntime(float tempRuntime)
+  {
+  String stringToPrint = "";
+     for (int i = 0; i < getLogicalSize(); i++) 
+     {
 
-        }
-      return stringToPrint;
-   }
+          if (movieArray[i].getDuration() <= tempRuntime)
+          {
+              stringToPrint += "|> Movie title: " + movieArray[i].getName() +  " - Duration: " + Float.toString(movieArray[i].getDuration()) + "\n";
+          }
 
-   
+      }
+    return stringToPrint;
+  }
+
+  //used to pull our list of movies at a string for outputing. This was made before I realised I could have movieDatabase also access the console.
   public String getMoviesAsString()
   {
       String stringToPrint = "|";
@@ -146,7 +140,7 @@ public class MovieDatabase
       return stringToPrint;
   }
 
-  //method to delete
+  //method to delete a movie, and maintain garbage collection
   public void deleteMovie(int selectedMovie) 
   {
     //check if the movie even exists in the database
@@ -185,6 +179,13 @@ public class MovieDatabase
       System.out.println("|");
       System.out.print("|> ");     
     }            
+  }
+
+
+  //used because BlueJ is an awful, awful program. It apprently loads the entire .java file into memory, makes changes and re-writes the ENTIRE file.
+  public void debugPrint(String debugString)
+  {
+      System.out.println("|DEBUG~$: " + debugString);
   }
        
 }

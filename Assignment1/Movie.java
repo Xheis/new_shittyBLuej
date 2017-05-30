@@ -1,8 +1,8 @@
 /* Name: Interface.java
- * Author: Chris Caelli     Date: 4/03/17
- * Purpose: Acts as interface between our User and all other classes.
- * Use: Launch as a terminal application and follow the prompts
- * Comments: Would add and use a unique identifier to all movies so they could be distincted when names/directors/filesize or durations are the same.
+ * Author: Chris Caelli     Date: 30/05/17
+ * Purpose: Holds our movie data, constructors and get/sets relevent to making a new movie
+ * Use: 
+ * Comments:
  */
 import java.text.*;
 
@@ -13,7 +13,7 @@ public class Movie
     private String director;
     private int fileSize;
     private float duration;
-    static int numberOfMovies;
+    static int numberOfMovies;      //static as per assignment2
     private boolean errorOccured;
     //private short ID; //Not used at the present
 
@@ -28,11 +28,12 @@ public class Movie
         fileSize = 0;
         duration = 0;
     }
-    public Movie(boolean didAnErrorOccur)
+    public Movie(boolean didAnErrorOccur)   //an overload so I can return a sential value movie as a error code.
     {
         //yes.
         errorOccured = true;
     }
+    
     public Movie(String tempName, String tempDirector, int tempFileSize, float tempDuration)
     { 
         // initialise instance variables

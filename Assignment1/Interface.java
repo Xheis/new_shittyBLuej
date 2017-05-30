@@ -615,7 +615,7 @@ public class Interface {
                 //enter Director
                 tempDirector = inputStream.nextLine ();
                 //enter FileSize
-                sanatiseNextintFromFile(inputStream.nextLine (),tempFileSize);
+                sanatiseNextIntFromFile(inputStream.nextLine (),tempFileSize);
                 //enter Duration
                 sanatiseNextFloatFromFile(inputStream.nextLine (),tempDuration); 
 
@@ -630,7 +630,7 @@ public class Interface {
 
                 System.out.println("|");
                 System.out.print("|>");
-            }
+            
             inputStream.close ();
         }
         catch (FileNotFoundException e)
@@ -646,14 +646,22 @@ public class Interface {
      //a method show help text
     private void openMovieDatabase()
     {
-        //alert user this will override their current movieDatabase
-        System.out.println("|>> This will repalce any unsaved changes to the current Movie Database. Are you sure you'd like to continue?");
-        System.out.println("|> - 1 Yes");
-        System.out.println("|> - 2 No");
-        System.out.println("|");
-        System.out.print("|> ");  
-        int answer = console.nextInt();
-        switch (answer)
+
+
+        int intAnswer[] = {-1};
+        boolean error = false;
+        do
+        {
+            //alert user this will override their current movieDatabase
+            System.out.println("|>> This will repalce any unsaved changes to the current Movie Database. Are you sure you'd like to continue?");
+            System.out.println("|> - 1 Yes");
+            System.out.println("|> - 2 No");
+            System.out.println("|");
+            System.out.print("|> ");  
+            error = sanatiseNextInt(intAnswer);
+        }while(error || (intAnswer[0] > 2) || (intAnswer[0] < 1));
+
+        switch (intAnswer[0])
         {
             case 1: 
             {

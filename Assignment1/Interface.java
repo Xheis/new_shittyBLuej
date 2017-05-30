@@ -476,10 +476,16 @@ public class Interface {
     {
         System.out.println("|>> Select a Movie to delete it");
         int selectedMovie = showNumberedMovies();                       //allows user to select movie
+        String tempName = database.getMovie(selectedMovie).getName();
         database.deleteMovie(selectedMovie);                            //deletes from database
         for (int i = 0; i < logicalSize; i++)                           //for each playlist...
         {
-            playlistArray[i].deleteMovie(selectedMovie);                //..also delete the movie.   
+
+            debugPrint("Attempting to delete from " + playlistArray[i].getPlaylistName());
+            int indexOfMovieInsidePlaylist = playlistArray[i].getMovieNumber(tempName);
+            if (indexOfMovieInsidePlaylist != -1) 
+            {
+                playlistArray[i].deleteMovie(indexOfMovieInsidePlaylist);                //..also delete the movie.   
         }
     }
     

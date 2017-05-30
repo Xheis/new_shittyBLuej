@@ -154,6 +154,7 @@ public class MovieDatabase
     if(getMovie(selectedMovie).getHasErrorOccured())
     {
       //error occured, movie doesn't exit
+      debugPrint("Movie Not Found!");
     }
     else
     {
@@ -165,7 +166,7 @@ public class MovieDatabase
           if (i < selectedMovie) 
           {
               tempMovieArray[i] = movieArray[i];
-              
+
           }
           else if (i == selectedMovie)
           {

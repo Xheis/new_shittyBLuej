@@ -1,19 +1,18 @@
-
 /* Name: Playlist.java
- * Author: Chris Caelli     Date: 19/04/17
- * Purpose: To hold exactly 3 movies unless the user deletes specific movies.
- * Use: Basically a mini MovieDatabase. When I started out it was it's own specific design, but in retrospect I would have just inherited the MovieDatabase and all it's functions. Or visa versa, if MovieDatabase required more stuff. 
- * Comments: Will require a rewrite depending on what we're allowed to use for Assignment
+ * Author: Chris Caelli     Date: 30/05/17
+ * Purpose: To hold movies & stats, as well as allowing the user to delete specific movies.
+ * Use: It inherites MovieDatabase as it's asically a mini MovieDatabase.
+ * Comments: 
  */
 
 public class Playlist extends MovieDatabase
 {
-
-    //private Movie movieArray[]; //movie1,movie2,movie3; //we hold 3 seperate instances of the movies from the movie database. This was in lieu of using pointers, due to some technical difficulties
+    //main variables we'll use are inherited from MovieDatabase.
+   
+    //stats
     private float totalDuration;
     private int totalSize;
     private String playlistName;
-    //private int logicalSize = 0; //previously called MovieCount 28/05/17  //was static
     
     /**
      * Constructor for objects of class Playlist
@@ -24,7 +23,6 @@ public class Playlist extends MovieDatabase
         playlistName = tempName;
         movieArray = new Movie[logicalSize];
         //generates our totalDUration & totalSize; Again, this is important to make sure that whenever or whereever we create a Playlist we're making a valid playlist.
-        //initPlaylist();
         updatePlaylist();
     }
 
@@ -33,9 +31,9 @@ public class Playlist extends MovieDatabase
       return playlistName;
     }
  
-
-  public boolean addMovieToPlaylist(Movie newMovie)
-  {
+    //a specific playlist function needed to add a movie to a playlist, and check if there's already a movie by the same name present.
+    public boolean addMovieToPlaylist(Movie newMovie)
+    {
  
     if (isPlaylistFull(newMovie)) 
     {
@@ -60,14 +58,13 @@ public class Playlist extends MovieDatabase
     }
   }
 
+  //check our 20GB & 1000minute limits. I took 20GB as 20,000 Bytes because google told me, and it's never wrong... right?
   private boolean isPlaylistFull(Movie newMovie) //initPlaylist()
     {
-        //createTotalDuration();
-        //createTotalSize();
-        int testFileSize = totalSize + newMovie.getFileSize();
-        float testDuration = totalDuration + newMovie.getDuration();
+        int testFileSize = totalSize + newMovie.getFileSize();          //make new total size
+        float testDuration = totalDuration + newMovie.getDuration();    //make new total duration
 
-        if ((testFileSize > 20000) || (testDuration > 1000)) 
+        if ((testFileSize > 20000) || (testDuration > 1000)) //check 'em'
         {
             //test failed. Playlist too big
             return (true);    
@@ -79,7 +76,7 @@ public class Playlist extends MovieDatabase
 
     }
 
-    private void updatePlaylist() //initPlaylist()
+    private void updatePlaylist() //previously known as initPlaylist()
     {
         createTotalDuration();
         createTotalSize();

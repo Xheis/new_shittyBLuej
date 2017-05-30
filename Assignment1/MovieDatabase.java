@@ -1,5 +1,5 @@
 /* Name: Interface.java
- * Author: Chris Caelli     Date: 4/03/17
+ * Author: Chris Caelli     Date: 30/05/17
  * Purpose: Acts as interface between our User and all other classes.
  * Use: Launch as a terminal application and follow the prompts
  * Comments: 
@@ -10,8 +10,7 @@ import java.text.*;
 
 public class MovieDatabase
 {
-   //define our 4 movies
-    //private Movie movie1,movie2,movie3,movie4;
+  //protected allows scope into the children of MovieDatabase i.e. Playlist.java
   protected Movie movieArray[]; //called allMovies in the assignment sheet.
   protected int logicalSize = 0; //previously called MovieCount 28/05/17  //was static
 

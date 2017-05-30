@@ -115,6 +115,25 @@ public class Interface {
             return(error);
     }
 
+        private boolean sanatiseNextIntFromFile(String nextLine, int [] convertedAnswer)    //what a beautiful pass-by-reference function which won't work in Java. Welcome to the single element array.
+    {
+        String answer = nextLine;
+        boolean error = false;
+
+            //santise
+            try{
+                convertedAnswer[0] = Integer.parseInt(answer);
+                error = false;
+                
+            }catch(NumberFormatException ex)
+            {
+                //Error: Not correct format
+                error = true;
+            }
+
+            return(error);
+    }
+
     private boolean sanatiseNextFloat(float [] convertedAnswer)
     {
         String answer = console.nextLine();
@@ -130,6 +149,24 @@ public class Interface {
                 System.out.println("|>> I couldn't understand your answer. Please enter again \n");
                 System.out.println("|");
                 System.out.print("|> ");
+                error = true;
+            }
+            
+            return(error);
+    }
+
+    private boolean sanatiseNextFloatFromFile(String nextLine, float [] convertedAnswer)
+    {
+        String answer = nextLine;
+        boolean error = false;
+
+            //santise
+            try{
+                convertedAnswer[0] = Float.parseFloat(answer);
+                error = false;
+            }catch(NumberFormatException ex)
+            {
+                //Error: Not correct format
                 error = true;
             }
             
@@ -551,6 +588,10 @@ public class Interface {
 
     private void openFromPath(String path)
     {
+        //null current database
+        Movie.numberOfMovies = 0;
+        database.logicalSize = 0;
+        logicalSize = 0;
 
         //success, save the path
         databasePath = path;
@@ -562,15 +603,33 @@ public class Interface {
             inputStream = new Scanner (new File (path));
             while (inputStream.hasNextLine ())
             {
-                String line = inputStream.nextLine ();
-                System.out.println (line);
-                /*
-                outputStream.println("Movie title: "    + database.getMovie(i).getName());
-                outputStream.println("Director: "       + database.getMovie(i).getDirector());
-                outputStream.println("fileSize: "       + database.getMovie(i).getFileSize());
-                outputStream.println("duration: "       + database.getMovie(i).getDuration());
-                outputStream.println("");
-                */
+                String tempName,tempDirector;
+                int tempFileSize[] = {0};
+                float tempDuration[] = {0};
+
+                //set up a temp. movie variable, for us to pass to the database to store.
+                Movie tempMovie;
+                tempMovie = new Movie();
+                //enter Name
+                tempName = inputStream.nextLine ();
+                //enter Director
+                tempDirector = inputStream.nextLine ();
+                //enter FileSize
+                sanatiseNextintFromFile(inputStream.nextLine (),tempFileSize);
+                //enter Duration
+                sanatiseNextFloatFromFile(inputStream.nextLine (),tempDuration); 
+
+                tempMovie.setName(tempName);
+                tempMovie.setDirector(tempDirector);
+                tempMovie.setFileSize(tempFileSize[0]);
+                tempMovie.setDuration(tempDuration[0]);
+
+                database.addMovie(tempMovie);
+                Movie.numberOfMovies++; //static as requested.
+                }
+
+                System.out.println("|");
+                System.out.print("|>");
             }
             inputStream.close ();
         }

@@ -650,6 +650,7 @@ public class Interface {
                         tempName = console.nextLine();
                         tempMovie.setName(tempName);
                         database.setMovie(selectedMovie,tempMovie);
+                        break;
                     }
                     case 2:
                     {
@@ -659,6 +660,7 @@ public class Interface {
                         tempDirector = console.nextLine();
                         tempMovie.setDirector(tempDirector);
                         database.setMovie(selectedMovie,tempMovie);
+                        break;
                     }
                     case 3:
                     {
@@ -668,6 +670,7 @@ public class Interface {
                         tempFileSize = console.nextInt();
                         tempMovie.setFileSize(tempFileSize);
                         database.setMovie(selectedMovie,tempMovie);
+                        break;
                     }
                     case 4:
                     {
@@ -677,9 +680,9 @@ public class Interface {
                         tempDuration = console.nextFloat();
                         tempMovie.setDuration(tempDuration);
                         database.setMovie(selectedMovie,tempMovie);
+                        break;
                     }
                     case 5:
-
                     default:
                 }
             }while(editMovieOptions!=5 && editMovieOptions!=-1);

@@ -80,6 +80,8 @@ Sleep, 150
  
 Send, 14{enter}	; 14 - Edit Movie 2
 Sleep, 150   
+Send, 1{enter}	; 1 - Select Movie 2
+Sleep, 150   
 Send, 1{enter}	; 1 - Change name
 Sleep, 150   
 Send, ChrisTest{enter}	; New name

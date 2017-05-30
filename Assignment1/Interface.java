@@ -379,8 +379,17 @@ public class Interface {
     private void listMoviesInSpecificPlaylist()
     {
         int intAnswer = showNumberedPlaylists();
-        System.out.println("|>> Movies in \"" + playlistArray[intAnswer].getPlaylistName() +  "\":");
-        System.out.println("|> " + playlistArray[intAnswer].getMoviesAsString());
+        if (intAnswer == -1) 
+        {
+            //no playlists or exited
+            System.out.println("|");
+            System.out.print("|>");
+        }
+        else
+        {
+            System.out.println("|>> Movies in \"" + playlistArray[intAnswer].getPlaylistName() +  "\":");
+            System.out.println("|> " + playlistArray[intAnswer].getMoviesAsString());
+        }
     }
     
     //a method show help text

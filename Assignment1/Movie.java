@@ -45,6 +45,10 @@ public class Movie
 
     //GetSet Methods 
     //-----------------------------------------------------------------------------
+    public boolean getHasErrorOccured()
+    {
+        return errorOccured;
+    }
     public String getName()
     {
 

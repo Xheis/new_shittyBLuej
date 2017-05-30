@@ -149,28 +149,36 @@ public class MovieDatabase
   //method to delete
   public void deleteMovie(int selectedMovie) 
   {
-        String tempNameOfMovie = movieArray[selectedMovie].getName();
-        Movie tempMovieArray[] = new Movie[logicalSize-1];
-        for (int i = 0; i< tempMovieArray.length; i++) 
-        {
-            //copy 1 to 1 until we get to selectedPlaylist, then copy 1+1 to 1
-            if (i < selectedMovie) 
-            {
-                tempMovieArray[i] = movieArray[i];
-            }
-            else if (i == selectedMovie)
-            {
-                //Do nothing, but I'm leaving this nested if to indicate we're deliberatelty doing nothing
-            }   
-            else if (i > selectedMovie)
-            {
-                tempMovieArray[i] = movieArray[i+1];
-            }
-        }
-        tempMovieArray = movieArray;
-        System.out.println("|> " + tempNameOfMovie + " deleted."); 
-        System.out.println("|");
-        System.out.print("|> ");          
+    //check if the movie even exists in the database
+    if(getMovie(selectedMovie).getHasErrorOccured())
+    {
+      //error occured, movie doesn't exit
+    }
+    else
+    {
+      String tempNameOfMovie = movieArray[selectedMovie].getName();
+      Movie tempMovieArray[] = new Movie[logicalSize-1];
+      for (int i = 0; i< tempMovieArray.length; i++) 
+      {
+          //copy 1 to 1 until we get to selectedPlaylist, then copy 1+1 to 1
+          if (i < selectedMovie) 
+          {
+              tempMovieArray[i] = movieArray[i];
+          }
+          else if (i == selectedMovie)
+          {
+              //Do nothing, but I'm leaving this nested if to indicate we're deliberatelty doing nothing
+          }   
+          else if (i > selectedMovie)
+          {
+              tempMovieArray[i] = movieArray[i+1];
+          }
+      }
+      tempMovieArray = movieArray;
+      System.out.println("|> " + tempNameOfMovie + " deleted."); 
+      System.out.println("|");
+      System.out.print("|> ");     
+    }            
   }
        
 }

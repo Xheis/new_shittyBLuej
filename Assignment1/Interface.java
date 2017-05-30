@@ -400,15 +400,36 @@ public class Interface {
     //a method show help text
     private void deleteFromPlaylist()
     {
-         String tempDirector;
-        //enter Director    
-        System.out.println("|>> Enter Name of Director");
-        System.out.println("|");
-        System.out.print("|> ");    
-        tempDirector = console.nextLine();
+         //select a playlist
+         System.out.println("|>> Select a Playlist");
+         int selectedPlaylist = showNumberedPlaylists();
+         int selectedMovie = -1;
+         //tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
+        
+        //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray
+        System.out.println("|>> To delete a movie, simply type in their number.");
+        do
+        {
+            selectedMovie = showNumberedMovies();
+            if(selectedMovie==-1)
+            {
+                break;
+            }
+            if(playlistArray[selectedPlaylist].addMovieToPlaylist(database.getMovie(selectedMovie)) == false)
+            {
+                //an error has occured! Notify user.
+                System.out.println("|> Playlist full! Please delete movies from this playlist if you'd like to add more. ");
+                System.out.println("|");
+                System.out.print("|> ");
 
-        //database.getMovieByDirector(director)
+            }
+        }while(selectedMovie!=-1);
+
+
+        System.out.println("|");
+        System.out.print("|> ");
     }
+
     
     //a method show help text
     private void deletePlaylist()
@@ -738,8 +759,6 @@ public class Interface {
     private void editPlaylist()
     {
         //select a playlist
-           
-
          System.out.println("|>> Select a Playlist to edit it");
          int selectedPlaylist = showNumberedPlaylists();
          int selectedMovie = -1;

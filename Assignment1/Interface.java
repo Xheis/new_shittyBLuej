@@ -696,18 +696,25 @@ public class Interface {
 
     private int editMovieMenu()
     {
-        System.out.println("|>> Edit Movie Menu");
-        System.out.println("|");        
-        System.out.println("|> 1 - Edit Name");
-        System.out.println("|> 2 - Edit Director");
-        System.out.println("|> 3 - Edit FileSize");
-        System.out.println("|> 4 - Edit Duration");
-        System.out.println("|> 5 - Exit Menu");
-        System.out.println("|");
-        System.out.print("|> ");
-        int answer = -1;
-        answer = console.nextInt();
-        return(answer);
+
+        int intAnswer = -1;
+        int error = false;
+        do
+        {
+            //ask user to navigate by number
+            System.out.println("|>> Edit Movie Menu");
+            System.out.println("|");        
+            System.out.println("|> 1 - Edit Name");
+            System.out.println("|> 2 - Edit Director");
+            System.out.println("|> 3 - Edit FileSize");
+            System.out.println("|> 4 - Edit Duration");
+            System.out.println("|> 5 - Exit Menu");
+            System.out.println("|");
+            System.out.print("|> ");
+            error = sanatiseNextInt(intAnswer);
+        }while(error || (intAnswer > 5) || (intAnswer < 1));
+        return(intAnswer);
+
     }
     
     private int showNumberedPlaylists()
@@ -736,7 +743,7 @@ public class Interface {
             System.out.println("|> Please choose a playlist between 0 - " + Integer.toString(logicalSize-1) + ". Enter -1 to leave this menu.");
             System.out.print("|> ");
             error = sanatiseNextInt(intAnswer);
-        }while(error || (intAnswer[0] > (logicalSize -1)) || (intAnswer[0] < -1));//intAnswer = console.nextInt();
+        }while(error || (intAnswer[0] > (logicalSize -1)) || (intAnswer[0] < -1));
 
         return(intAnswer[0]);
     }

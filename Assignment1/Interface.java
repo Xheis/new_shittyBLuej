@@ -361,6 +361,8 @@ public class Interface {
         {
             System.out.println("|> " + database.getMovie(i).getName());
         }
+        
+        System.out.println("|");
         System.out.print("|> ");
     }
     
@@ -382,14 +384,16 @@ public class Interface {
         if (intAnswer == -1) 
         {
             //no playlists or exited
-            System.out.println("|");
-            System.out.print("|>");
+            
         }
         else
         {
             System.out.println("|>> Movies in \"" + playlistArray[intAnswer].getPlaylistName() +  "\":");
             System.out.println("|> " + playlistArray[intAnswer].getMoviesAsString());
         }
+
+        System.out.println("|");
+        System.out.print("|> ");
     }
     
     //a method show help text

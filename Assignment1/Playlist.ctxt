@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Playlist
+comment0.text=\ Name\:\ Playlist.java\r\n\ Author\:\ Chris\ Caelli\ \ \ \ \ Date\:\ 19/04/17\r\n\ Purpose\:\ To\ hold\ exactly\ 3\ movies\ unless\ the\ user\ deletes\ specific\ movies.\r\n\ Use\:\ Basically\ a\ mini\ MovieDatabase.\ When\ I\ started\ out\ it\ was\ it's\ own\ specific\ design,\ but\ in\ retrospect\ I\ would\ have\ just\ inherited\ the\ MovieDatabase\ and\ all\ it's\ functions.\ Or\ visa\ versa,\ if\ MovieDatabase\ required\ more\ stuff.\ \r\n\ Comments\:\ Will\ require\ a\ rewrite\ depending\ on\ what\ we're\ allowed\ to\ use\ for\ Assignment\r\n
+comment1.params=tempName
+comment1.target=Playlist(java.lang.String)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Playlist\r\n
+comment2.params=
+comment2.target=java.lang.String\ getPlaylistName()
+comment3.params=newMovie
+comment3.target=boolean\ addMovieToPlaylist(Movie)
+comment4.params=newMovie
+comment4.target=boolean\ isPlaylistFull(Movie)
+comment5.params=
+comment5.target=void\ updatePlaylist()
+comment6.params=
+comment6.target=void\ createTotalDuration()
+comment7.params=
+comment7.target=float\ getTotalDuration()
+comment8.params=
+comment8.target=void\ createTotalSize()
+comment9.params=
+comment9.target=float\ getTotalSize()
+numComments=10

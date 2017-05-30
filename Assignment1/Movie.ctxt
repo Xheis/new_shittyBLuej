@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=Movie
+comment1.params=
+comment1.target=Movie()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Movie\r\n
+comment10.params=
+comment10.target=float\ getDuration()
+comment11.params=newDuration
+comment11.target=void\ setDuration(float)
+comment2.params=didAnErrorOccur
+comment2.target=Movie(boolean)
+comment3.params=tempName\ tempDirector\ tempFileSize\ tempDuration
+comment3.target=Movie(java.lang.String,\ java.lang.String,\ int,\ float)
+comment4.params=
+comment4.target=java.lang.String\ getName()
+comment5.params=newName
+comment5.target=void\ setName(java.lang.String)
+comment6.params=
+comment6.target=java.lang.String\ getDirector()
+comment7.params=newDirector
+comment7.target=void\ setDirector(java.lang.String)
+comment8.params=
+comment8.target=int\ getFileSize()
+comment9.params=newFileSize
+comment9.target=void\ setFileSize(int)
+numComments=12

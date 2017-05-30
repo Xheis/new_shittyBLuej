@@ -1,0 +1,12 @@
+;test bed for java stuff
+
+L
+Sleep, 500      ; Pause and ready
+Send, new_movie One,One,1,1.1{enter}
+Sleep, 1000      ; 1s pause
+Send, new_movie Two,Two,2,2.2{enter}
+Sleep, 1000      ; 1s pause
+Send, new_movie Three,Three,3,3.3{enter}
+Sleep, 1000      ; 1s pause
+Send, new_playlist{enter}
+Sleep, 1000      ; 1s pause

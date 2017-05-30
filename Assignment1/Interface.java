@@ -751,6 +751,40 @@ public class Interface {
         return(intAnswer[0]);
     }
 
+    private int showNumberedMoviesInPlaylist(int playlistIndex)
+    {
+        int intAnswer[] = {-1};
+        boolean error = false;
+        System.out.println("|>> Showing all Movies in " + playlistArray[playlistIndex].getPlaylistName());
+        System.out.println("|");
+        //loop all playlists, show them numbered;
+        for (int i = 0; i < playlistArray[playlistIndex].getLogicalSize(); i++) 
+        {
+            if (i < 10) 
+            {
+                System.out.println("|> " + Integer.toString(i) + "   - " + playlistArray[playlistIndex].getMovie(i).getName()); 
+            }
+            else if (i < 100) 
+            {
+                System.out.println("|> " + Integer.toString(i) + "  - " + playlistArray[playlistIndex].getMovie(i).getName());  
+            }
+            else
+            {
+                System.out.println("|> " + Integer.toString(i) + " - " + playlistArray[playlistIndex].getMovie(i).getName());   
+            }
+        }
+
+        do
+        {
+            //ask user to add by number
+            System.out.println("| ");
+            System.out.println("|> Please choose a movie between 0 - " + Integer.toString(playlistArray[playlistIndex].getLogicalSize()-1) + ". Enter -1 to leave this menu.");
+            System.out.print("|> ");
+            error = sanatiseNextInt(intAnswer);
+        }while(error || (intAnswer[0] > (playlistArray[playlistIndex].getLogicalSize()-1)) || (intAnswer[0] < -1));//intAnswer = console.nextInt();
+        return(intAnswer[0]);
+    }
+
 
      //a method show help text
     private void editPlaylist()

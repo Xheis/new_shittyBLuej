@@ -415,14 +415,11 @@ public class Interface {
             {
                 break;
             }
-            if(playlistArray[selectedPlaylist].addMovieToPlaylist(database.getMovie(selectedMovie)) == false)
+            else
             {
-                //an error has occured! Notify user.
-                System.out.println("|> Playlist full! Please delete movies from this playlist if you'd like to add more. ");
-                System.out.println("|");
-                System.out.print("|> ");
-
+                playlistArray[selectedPlaylist].deleteMovie(selectedMovie);
             }
+            
         }while(selectedMovie!=-1);
 
 

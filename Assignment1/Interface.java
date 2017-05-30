@@ -624,13 +624,13 @@ public class Interface {
      //a method show help text
     private void editMovie()
     {
-        System.out.println("|>> Select a Movie to edit it");
          int selectedMovie;// = showNumberedMovies();
          int editMovieOptions;
         //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray
         //System.out.println("|>> To add a movie, simply type in their number. When you are done, type in -1");
         do
         {
+            System.out.println("|>> Select a Movie to edit it");
             selectedMovie = showNumberedMovies();
             if(selectedMovie==-1)
             {
@@ -697,8 +697,8 @@ public class Interface {
     private int editMovieMenu()
     {
 
-        int intAnswer = -1;
-        int error = false;
+        int intAnswer[] = {-1};
+        boolean error = false;
         do
         {
             //ask user to navigate by number
@@ -712,8 +712,8 @@ public class Interface {
             System.out.println("|");
             System.out.print("|> ");
             error = sanatiseNextInt(intAnswer);
-        }while(error || (intAnswer > 5) || (intAnswer < 1));
-        return(intAnswer);
+        }while(error || (intAnswer[0] > 5) || (intAnswer[0] < 1));
+        return(intAnswer[0]);
 
     }
     

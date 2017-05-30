@@ -76,4 +76,15 @@ Sleep, 150
 Send, 6{enter}	; 6 - View Movies in a playlist
 Sleep, 150   
 Send, 0{enter}	; 0 - View Movies in Playlist1
+Sleep, 150  
+ 
+Send, 14{enter}	; 14 - Edit Movie 2
+Sleep, 150   
+Send, 1{enter}	; 1 - Change name
+Sleep, 150   
+Send, ChrisTest{enter}	; New name
+Sleep, 150   
+Send, 5{enter}	; 5 - exit
+Sleep, 150   
+Send, -1{enter}	; -1 - Quit
 Sleep, 150   

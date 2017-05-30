@@ -66,3 +66,12 @@ Send, 0{enter}	; Add Movie 1 again
 Sleep, 150      
 Send, -1{enter}	; Quit
 Sleep, 150      
+
+Send, 10{enter}	; 10 - Delete Movie
+Sleep, 150   
+Send, 3{enter}	; 3 - Movie 4
+Sleep, 150   
+Send, -1{enter}	; -1 - Exit menu
+
+
+Sleep, 150   

@@ -60,6 +60,7 @@ public class MovieDatabase
       movieArray = tempMovies;
       System.out.println("|> " + newMovie.getName() + " added!");
       logicalSize++;
+       debugPrint("LogiSize= " + Integer.toString(logicalSize));
     }   
     
    public Movie getMovie(int movieNumber)
@@ -164,10 +165,13 @@ public class MovieDatabase
           if (i < selectedMovie) 
           {
               tempMovieArray[i] = movieArray[i];
+              
           }
           else if (i == selectedMovie)
           {
               //Do nothing, but I'm leaving this nested if to indicate we're deliberatelty doing nothing
+              debugPrint("Movie deleted at index " + Integer.toString(i));
+              tempMovieArray[i] = movieArray[i+1];
           }   
           else if (i > selectedMovie)
           {
@@ -175,6 +179,8 @@ public class MovieDatabase
           }
       }
       movieArray = tempMovieArray;
+      logicalSize--;
+       debugPrint("LogiSize= " + Integer.toString(logicalSize));
       System.out.println("|> " + tempNameOfMovie + " deleted."); 
       System.out.println("|");
       System.out.print("|> ");     

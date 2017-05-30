@@ -1,15 +1,17 @@
 /* Name: Interface.java
- * Author: Chris Caelli     Date: 4/03/17
+ * Author: Chris Caelli     Date: 30/05/17
  * Purpose: Acts as interface between our User and all other classes.
- * Use: Launch as a terminal application and follow the prompts
+ * Use: Launch terminal application and follow the prompts
  * Comments: 
+ * You don't have to use it, but I've attached a AutoHotKey.ahk that I was using for benchtesting. 
+ * Feel free to make use of it. If using BlueJ, you have to check "Unlimited Buffer" in the Terminal->Options
  */
 
-import java.util.*;
-import java.text.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;          
+import java.util.*;                         //general IO
+import java.text.*;                         //string classes
+import java.io.File;                        //file IO
+import java.io.FileNotFoundException;       //File try/catch defintions
+import java.io.PrintWriter;                 //file output
 
 public class Interface {
     
@@ -17,14 +19,14 @@ public class Interface {
      * Private Varaibles for encapsulation
      */
     
-    private Playlist playlistArray[];   //called playlists[] in the assignment sheet. Seems ambigious to have "allMovies" and "playlists", why not "allPlaylists"? I prefered this name.
+    private Playlist playlistArray[];       //called playlists[] in the assignment sheet. Seems ambigious to have "allMovies" and "playlists", why not "allPlaylists"? I prefered this name.
     private MovieDatabase database;         //A single movie database is used
     private boolean exit;                   //exit is used to to exit our program's input while loop
-    private int logicalSize = 0;              //logicalSize is a int used to count the number of playlists we have. Used to be called playlistCount
+    private int logicalSize = 0;            //logicalSize is a int used to count the number of playlists we have. Used to be called playlistCount
     
-    private Scanner console = new Scanner(System.in);   //the console will mainly be used
+    private Scanner console = new Scanner(System.in);   //the console is used for our general IO
 
-    private String databasePath = "";
+    private String databasePath = "";                   //points to the active database, if loaded/saved.
 
     //our main hook for use to start the program.
     public static void main(String[] args)
@@ -51,6 +53,8 @@ public class Interface {
        database = new MovieDatabase();
     }
 
+// ------------------------------------- START UP BLOCK ---------------------------------------------
+
     //this method will run our user interface via TIO
     private void launchTIO()
     {
@@ -69,7 +73,7 @@ public class Interface {
         }
     }
 
-    //this method is made for visability 
+    //this method is made for easy recalling of our commands 
     private void printCommandsString()
     {
         System.out.println("|>> Commands:");
@@ -91,12 +95,15 @@ public class Interface {
         System.out.println("|> 16 - Exit");
         System.out.print("|> ");
     }
+// ------------------------------------- START UP BLOCK ---------------------------------------------
 
-    
+
+// ------------------------------------- SANTISE INPUT BLOCK -----------------------------------------   
+    //sanatiseNextInt is used in lieu of the regular "console.nextInt", as a way we can capture and handle user input.
     private boolean sanatiseNextInt(int [] convertedAnswer)    //what a beautiful pass-by-reference function which won't work in Java. Welcome to the single element array.
     {
-        String answer = console.nextLine();
-        boolean error = false;
+        String answer = console.nextLine();         //get next line
+        boolean error = false;                      //did an error happen?
 
             //santise
             try{
@@ -115,7 +122,8 @@ public class Interface {
             return(error);
     }
 
-        private boolean sanatiseNextIntFromFile(String nextLine, int [] convertedAnswer)    //what a beautiful pass-by-reference function which won't work in Java. Welcome to the single element array.
+    //sanatiseNextIntFromFile is used in lieu of the regular "file.nextLine", as a way we can capture and handle our File I/O.
+    private boolean sanatiseNextIntFromFile(String nextLine, int [] convertedAnswer)    //what a beautiful pass-by-reference function which won't work in Java. Welcome to the single element array.
     {
         String answer = nextLine;
         boolean error = false;
@@ -173,85 +181,67 @@ public class Interface {
             return(error);
     }
 
+// ------------------------------------- SANTISE INPUT BLOCK -----------------------------------------
 
+
+// ------------------------------------- USER INPUT & MAIN LOOP BLOCK ---------------------------------
     private void processUserInput()
     {
-        //Take user input by looping through the uglest nested if-else tree you can imagine. I wanted to do the program like this, but I didn't work out how to make a proper command line parser. 
-                    //String answer;          //Answer as a string
-                    int menuOption[] = {0};//convertedAnswer;    //Answer converted to int. Allows us to check number range, sanatise etc.
-                    //boolean error;  //answer error flag
-                    //error = false;
+        int menuOption[] = {0}; //Program navigation is via ints. This is the int we'll use. It's a pointer because 
+                                //I planned for the santiseNextInt() methods without realising we can't pass-by-reference in java. 
+                                //So... single element array hack it is
+        //start by grabbing a command and santise till good
+        while(sanatiseNextInt(menuOption));
+        //switch on our valid int
+        switch(menuOption[0])
+        {
+            case 1: help();break; 
 
-        //start by grabbing a command and checking it
-       // do 
-        //{                           //get the right answer
-                    //answer = console.nextLine();
-                    //if (sanatiseNextInt(menuOption))
-                    //{
-                    //    continue; //an error has occured, skip this loop iteration and start again.
-                    //}
-                    while(sanatiseNextInt(menuOption));
-                    //santise
-                    /*try{
-                        convertedAnswer = Integer.parseInt(answer);
-                        error = false;
-                    }catch(NumberFormatException ex)
-                    {
-                        //Error: Not correct format
-                        System.out.println("|");
-                        System.out.println("|>> I couldn't understand your answer. Please enter again \n");
-                        System.out.println("|");
-                        System.out.print("|> ");
-                        error = true;
-                        continue; //skips this do loop operation
-                    } */
+            case 2: newMovie();break; 
 
-                    switch(menuOption[0])
-                    {
-                        case 1: help();break; 
+            case 3: newPlaylist();break; 
 
-                        case 2: newMovie();break; 
+            case 4: listMovies();break; 
 
-                        case 3: newPlaylist();break; 
+            case 5: listPlaylists();break; 
 
-                        case 4: listMovies();break; 
+            case 6: listMoviesInSpecificPlaylist();break; 
 
-                        case 5: listPlaylists();break; 
+            case 7: listByMovieDirector();break; 
 
-                        case 6: listMoviesInSpecificPlaylist();break; 
+            case 8: deleteFromPlaylist();break; 
 
-                        case 7: listByMovieDirector();break; 
+            case 9: deletePlaylist();break; 
 
-                        case 8: deleteFromPlaylist();break; 
+            case 10: deleteMovie();break; 
 
-                        case 9: deletePlaylist();break; 
+            case 11: saveMovieDatabase();break; 
 
-                        case 10: deleteMovie();break; 
+            case 12: openMovieDatabase();break; 
 
-                        case 11: saveMovieDatabase();break; 
+            case 13: listMoviesUnderSpecificRuntime();break; 
 
-                        case 12: openMovieDatabase();break; 
+            case 14: editMovie();break; 
 
-                        case 13: listMoviesUnderSpecificRuntime();break; 
+            case 15: editPlaylist();break; 
 
-                        case 14: editMovie();break; 
+            case 16: exit();break; 
 
-                        case 15: editPlaylist();break; 
-
-                        case 16: exit();break; 
-
-                        default: 
-                            //Error: Not recognised command
-                            System.out.println("|");
-                            System.out.println("|>> Not a recognised command. Please enter again");
-                            System.out.println("|");
-                            System.out.print("|> ");
-                            //error = true;
-                    }
-        //}while (error == true);
+            default: 
+                //Error: Not recognised command
+                System.out.println("|");
+                System.out.println("|>> Not a recognised command. Please enter again");
+                System.out.println("|");
+                System.out.print("|> ");
+                //error = true;
+        }
     }
+// ------------------------------------- USER INPUT & MAIN LOOP BLOCK ---------------------------------
 
- //a method show help text
+
+// ------------------------------------- COMMAND FUNCTIONS BLOCK --------------------------------------
+
+ //a method show the help text
     private void help()
     {
         System.out.println("|");
@@ -279,7 +269,7 @@ public class Interface {
             System.out.println("|");
             System.out.print("|> ");
             tempName = console.nextLine();
-        }while(tempName.matches(".*\\w.*") == false);       //read at https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#matches(java.lang.String)
+        }while(tempName.matches(".*\\w.*") == false);       //keep asking for input till non-blank. Read at https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#matches(java.lang.String)
         
 
         do
@@ -298,16 +288,15 @@ public class Interface {
         System.out.println("|>> Enter FileSize of Movie (e.g. 512 for 512mb)");
         System.out.println("|");
         System.out.print("|> ");
-        //tempFileSize = console.nextInt();
         while (sanatiseNextInt(tempFileSize));   //will repeat input until a valid input is taken
 
         //enter Duration
         System.out.println("|>> Enter Duration of Movie (e.g. 144.2 for 144.2 minutes))");
         System.out.println("|");
         System.out.print("|> ");
-        //tempDuration = console.nextFloat();
         while (sanatiseNextFloat(tempDuration));   //will repeat input until a valid input is taken
 
+        //add our inputs to the new temp movie.
         tempMovie.setName(tempName);
         tempMovie.setDirector(tempDirector);
         tempMovie.setFileSize(tempFileSize[0]);
@@ -320,7 +309,7 @@ public class Interface {
             System.out.println("|> Director: " + tempMovie.getDirector());
             System.out.println("|> FileSize: " + tempMovie.getFileSize());
             System.out.println("|> Duration: " + tempMovie.getDuration());
-            database.addMovie(tempMovie);
+            database.addMovie(tempMovie);   //add movie to database
             Movie.numberOfMovies++; //static as requested.
 
             System.out.println("|");
@@ -334,16 +323,15 @@ public class Interface {
         }
     }
     
-    //a method show help text
+    //a method make a new playlist
     private void newPlaylist()
     {
         String tempPlaylistName;
         int intAnswer = 0;
-        
 
         do
         {
-        //enter Name
+        //enter Playlist Name
         System.out.println("|");
         System.out.println("|>> Enter Name of new Playlist");
         System.out.println("|");
@@ -353,32 +341,34 @@ public class Interface {
         
 
 
-        Playlist tempPlaylist = new Playlist(tempPlaylistName);
+        Playlist tempPlaylist = new Playlist(tempPlaylistName); //constructor makes a new playlist with our name.
+
         //now that we have a new Playlist, let's look at adding movies before adding it to our playlistArray
         System.out.println("|>> To select movies, simply type in their number. When you are done, type in -1");
         do
         {
-            intAnswer = showNumberedMovies();
+            intAnswer = showNumberedMovies();   //shows our movies as options, and returns the option the user picked
             if(intAnswer==-1)
             {
-                break;
+                break;  //user wanted to quit
             }
             else if (intAnswer > database.getLogicalSize())
             {
-                //wrong choice
+                //wrong! choice doesn't go higher than the number of movies we have
 
             }
             else
             {
                 tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
             }
-    }while(intAnswer!=-1);
-    
+        }while(intAnswer!=-1);
+        //add this new playlist now
         addNewPlaylist(tempPlaylist);
         System.out.println("|");
         System.out.print("|> ");
     }
 
+    //sub-method for adding plalist to our playlistArray. For readablity
     private void addNewPlaylist(Playlist tempPlaylist)
     {
         Playlist tempPlaylists[] = new Playlist[logicalSize+1];
@@ -389,12 +379,12 @@ public class Interface {
         debugPrint("LogiSize= " + Integer.toString(logicalSize));
     }
     
-    //a method show help text
+    //a method show all movies in our database
     private void listMovies()
     {
         System.out.println("|>> Movies in Database:");
         System.out.println("|");
-        for (int i = 0; i < database.getLogicalSize(); i++) 
+        for (int i = 0; i < database.getLogicalSize(); i++)     //loop movies
         {
             System.out.println("|> " + database.getMovie(i).getName());
         }
@@ -403,7 +393,7 @@ public class Interface {
         System.out.print("|> ");
     }
     
-    //a method show help text
+    //a method show playlists
     private void listPlaylists()
     {
         System.out.println("|>> Playlists in System:");
@@ -414,14 +404,13 @@ public class Interface {
         System.out.print("|> ");
     }
     
-    //a method show help text
+    //a method show specific playlist's contents
     private void listMoviesInSpecificPlaylist()
     {
         int intAnswer = showNumberedPlaylists();
         if (intAnswer == -1) 
         {
             //no playlists or exited
-            
         }
         else
         {
@@ -433,7 +422,7 @@ public class Interface {
         System.out.print("|> ");
     }
     
-    //a method show help text
+    //a method show by director
     private void listByMovieDirector()
     {
         String tempDirector, stringToPrint;
@@ -449,7 +438,7 @@ public class Interface {
         System.out.print("|> "); 
     }
     
-    //a method show help text
+    //a method delete a movie from a playlist
     private void deleteFromPlaylist()
     {
          //select a playlist
@@ -480,7 +469,7 @@ public class Interface {
     }
 
     
-    //a method show help text
+    //a method delete a playlist
     private void deletePlaylist()
     {
         System.out.println("|>> Select a Playlist to delete it");
@@ -512,7 +501,7 @@ public class Interface {
         System.out.print("|> ");  
     }
     
-    //a method show help text
+    //a method delete a movie
     private void deleteMovie()
     {
         System.out.println("|>> Select a Movie to delete it");
@@ -531,7 +520,7 @@ public class Interface {
         }
     }
     
-    //a method show help text
+    //a method save Movie Database. Handles more user interaction
     private void saveMovieDatabase()
     {
         //does a path exit?
@@ -556,6 +545,7 @@ public class Interface {
         }
     }
     
+    //sub-method to save Movie Database to a specific path. handles more specific file interation
     private void saveToPath(String path)
     {
         // -------- my implimentation of Lecture 11 --------
@@ -585,6 +575,7 @@ public class Interface {
         // -----------------------------------------------
     }
 
+    //sub-method to open Movie Database to a specific path. handles more specific file interation
     private void openFromPath(String path)
     {
         //null current database
@@ -672,7 +663,7 @@ public class Interface {
         
         // -----------------------------------------------
     }
-     //a method show help text
+    //a method save Movie Database. Handles more user interaction
     private void openMovieDatabase()
     {
 
@@ -714,7 +705,7 @@ public class Interface {
         }
     }
     
-     //a method show help text
+     //a method show all movies under a duration given
     private void listMoviesUnderSpecificRuntime()
     {
         float tempRuntime[] = {0};
@@ -732,7 +723,7 @@ public class Interface {
         System.out.print("|> "); 
     }
     
-     //a method show help text
+     //a method edit any movie in our database
     private void editMovie()
     {
          int selectedMovie;// = showNumberedMovies();
@@ -805,6 +796,7 @@ public class Interface {
         System.out.print("|> ");
     }
 
+    //sub-method for showing all the options for edditing a movie and taking the user's input for what they choice
     private int editMovieMenu()
     {
 
@@ -828,6 +820,7 @@ public class Interface {
 
     }
     
+    //sub-method for showing and handling user input for choosing a playlist
     private int showNumberedPlaylists()
     {
         int intAnswer[] = {-1};
@@ -859,6 +852,7 @@ public class Interface {
         return(intAnswer[0]);
     }
     
+    //sub-method for showing and handling user input for choosing a movie
     private int showNumberedMovies()
     {
         int intAnswer[] = {-1};
@@ -893,6 +887,7 @@ public class Interface {
         return(intAnswer[0]);
     }
 
+    //sub-method for showing and handling user input for choosing a movie inside any playlist
     private int showNumberedMoviesInPlaylist(int playlistIndex)
     {
         int intAnswer[] = {-1};
@@ -928,7 +923,7 @@ public class Interface {
     }
 
 
-     //a method show help text
+     //a method edit the playlist by adding more movies to it
     private void editPlaylist()
     {
         //select a playlist
@@ -962,7 +957,7 @@ public class Interface {
     }
 
 
-    //a method show help text
+    //a method exit our program
     private void exit()
     {
         exit = true;
@@ -983,7 +978,7 @@ public class Interface {
     }
 
 
-    //chrisCopy2implimentation from Lecture 9
+    //chrisCopy2implimentation from Lecture 9. Also found in MovieDatabase.
     private void chrisCopy2implimentation(Playlist array1[], Playlist array2[], Playlist newPlaylist)
     {
       for(int i=0; i< array1.length; i++)
@@ -993,6 +988,7 @@ public class Interface {
       array2[array1.length] = newPlaylist;
     }
 
+    //used because BlueJ is an awful, awful program. It apprently loads the entire .java file into memory, makes changes and re-writes the ENTIRE file.
     public void debugPrint(String debugString)
     {
         System.out.println("|DEBUG~$: " + debugString);

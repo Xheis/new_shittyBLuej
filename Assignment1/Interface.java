@@ -236,24 +236,24 @@ public class Interface {
 
         do
         {
-        	//enter Name
-        	System.out.println("|");
-	        System.out.println("|>> Enter Name of Movie");
-	        System.out.println("|");
-	        System.out.print("|> ");
-			tempName = console.nextLine();
-        }while(tempName.matches(".*\\w.*") == false);		//read at https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#matches(java.lang.String)
+            //enter Name
+            System.out.println("|");
+            System.out.println("|>> Enter Name of Movie");
+            System.out.println("|");
+            System.out.print("|> ");
+            tempName = console.nextLine();
+        }while(tempName.matches(".*\\w.*") == false);       //read at https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#matches(java.lang.String)
         
 
         do
         {
-		    //enter Director   
-		    System.out.println("|"); 
-		    System.out.println("|>> Enter Name of Director");
-		    System.out.println("|");
-		    System.out.print("|> ");    
-		    tempDirector = console.nextLine();
-        }while(tempDirector.matches(".*\\w.*") == false);		//read at https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#matches(java.lang.String)
+            //enter Director   
+            System.out.println("|"); 
+            System.out.println("|>> Enter Name of Director");
+            System.out.println("|");
+            System.out.print("|> ");    
+            tempDirector = console.nextLine();
+        }while(tempDirector.matches(".*\\w.*") == false);       //read at https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#matches(java.lang.String)
         
 
 
@@ -306,13 +306,13 @@ public class Interface {
 
         do
         {
-		//enter Name
+        //enter Name
         System.out.println("|");
         System.out.println("|>> Enter Name of new Playlist");
         System.out.println("|");
         System.out.print("|> ");
         tempPlaylistName = console.nextLine();
-        }while(tempPlaylistName.matches(".*\\w.*") == false);		//read at https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#matches(java.lang.String)
+        }while(tempPlaylistName.matches(".*\\w.*") == false);       //read at https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#matches(java.lang.String)
         
 
 
@@ -328,13 +328,13 @@ public class Interface {
             }
             else if (intAnswer > database.getLogicalSize())
             {
-            	//wrong choice
+                //wrong choice
 
             }
             else
-        	{
-        		tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
-        	}
+            {
+                tempPlaylist.addMovieToPlaylist(database.getMovie(intAnswer));
+            }
     }while(intAnswer!=-1);
     
         addNewPlaylist(tempPlaylist);
@@ -486,6 +486,7 @@ public class Interface {
             if (indexOfMovieInsidePlaylist != -1) 
             {
                 playlistArray[i].deleteMovie(indexOfMovieInsidePlaylist);                //..also delete the movie.   
+            }
         }
     }
     
@@ -727,11 +728,11 @@ public class Interface {
 
         do
         {
-			//ask user to add by number
-			System.out.println("| ");
-			System.out.println("|> Please choose a playlist between 0 - " + Integer.toString(logicalSize-1) + ". Enter -1 to leave this menu.");
-			System.out.print("|> ");
-        	error = sanatiseNextInt(intAnswer);
+            //ask user to add by number
+            System.out.println("| ");
+            System.out.println("|> Please choose a playlist between 0 - " + Integer.toString(logicalSize-1) + ". Enter -1 to leave this menu.");
+            System.out.print("|> ");
+            error = sanatiseNextInt(intAnswer);
         }while(error || (intAnswer[0] > (logicalSize -1)) || (intAnswer[0] < -1));//intAnswer = console.nextInt();
 
         return(intAnswer[0]);
@@ -762,11 +763,11 @@ public class Interface {
 
         do
         {
-			//ask user to add by number
-			System.out.println("| ");
-			System.out.println("|> Please choose a movie between 0 - " + Integer.toString(database.getLogicalSize()-1) + ". Enter -1 to leave this menu.");
-			System.out.print("|> ");
-        	error = sanatiseNextInt(intAnswer);
+            //ask user to add by number
+            System.out.println("| ");
+            System.out.println("|> Please choose a movie between 0 - " + Integer.toString(database.getLogicalSize()-1) + ". Enter -1 to leave this menu.");
+            System.out.print("|> ");
+            error = sanatiseNextInt(intAnswer);
         }while(error || (intAnswer[0] > (database.getLogicalSize()-1)) || (intAnswer[0] < -1));//intAnswer = console.nextInt();
         return(intAnswer[0]);
     }

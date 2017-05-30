@@ -347,7 +347,9 @@ public class Interface {
         Playlist tempPlaylists[] = new Playlist[logicalSize+1];
         chrisCopy2implimentation(playlistArray,tempPlaylists,tempPlaylist);
         playlistArray = tempPlaylists;
+
         logicalSize++;
+        debugPrint("LogiSize= " + Integer.toString(logicalSize));
     }
     
     //a method show help text
@@ -453,6 +455,8 @@ public class Interface {
         }
         playlistArray = tempPlaylistArray;
         logicalSize--;
+
+        debugPrint("LogiSize= " + Integer.toString(logicalSize));
         System.out.println("|> " + tempNameOfPlaylist + " deleted."); 
         System.out.println("|");
         System.out.print("|> ");  
@@ -850,6 +854,11 @@ public class Interface {
         array2[i] = array1[i];
       }
       array2[array1.length] = newPlaylist;
+    }
+
+    public void debugPrint(String debugString)
+    {
+        System.out.println("|DEBUG~$: " + debugString);
     }
 
 }

@@ -596,7 +596,7 @@ public class Interface {
         databasePath = path;
         // -------- my implimentation of Lecture 11 --------
         Scanner inputStream = null;
-        System.out.println ("The file " + path +"\ncontains the following lines:\n");
+        System.out.println ("Reading file " + path +" now...");
         try
         {
             inputStream = new Scanner (new File (path));
@@ -611,13 +611,16 @@ public class Interface {
                 tempMovie = new Movie();
                 //enter Name
                 tempName = inputStream.nextLine();
-                debugPrint("Opened: " + tempName);
                 //enter Director
                 tempDirector = inputStream.nextLine();
+
+
                 //enter FileSize
                 sanatiseNextIntFromFile(inputStream.nextLine(), tempFileSize);
                 //enter Duration
                 sanatiseNextFloatFromFile(inputStream.nextLine(), tempDuration); 
+
+                debugPrint("Opened: " + tempName + " " + tempDirector + " " + Integer.toString(tempFileSize) + " " + Float.toString(tempDuration));
                 tempMovie.setName(tempName);
                 tempMovie.setDirector(tempDirector);
                 tempMovie.setFileSize(tempFileSize[0]);

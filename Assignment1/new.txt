@@ -1,0 +1,20 @@
+Movie title: Movie1
+Director: Director1
+fileSize: 111
+duration: 1.11
+
+Movie title: ChrisTest
+Director: Director2
+fileSize: 222
+duration: 22.2
+
+Movie title: Movie3
+Director: Director3
+fileSize: 222
+duration: 22.2
+
+Movie title: Movie5
+Director: Director5
+fileSize: 222
+duration: 22.2
+

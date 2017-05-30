@@ -503,6 +503,7 @@ public class Interface {
          //no path exists, please make one
         System.out.println("|>> Saving a new database:");
         System.out.println("|> No path is registered for this Database. Please enter a new path to save the current Movie Database.");
+        System.out.println("|> This can either be Absolute (e.g. C:/foo.txt) or Relative (e.g. foo.txt)");
         System.out.print("|>");
         String answerPath = "";
         answerPath = console.nextLine();
@@ -535,6 +536,8 @@ public class Interface {
                 outputStream.println("");
             }
             outputStream.close();
+            System.out.println("|");
+            System.out.print("|> ");  
         }
         catch (FileNotFoundException e)
         {
@@ -557,6 +560,19 @@ public class Interface {
         try
         {
             inputStream = new Scanner (new File (path));
+            while (inputStream.hasNextLine ())
+            {
+                String line = inputStream.nextLine ();
+                System.out.println (line);
+                /*
+                outputStream.println("Movie title: "    + database.getMovie(i).getName());
+                outputStream.println("Director: "       + database.getMovie(i).getDirector());
+                outputStream.println("fileSize: "       + database.getMovie(i).getFileSize());
+                outputStream.println("duration: "       + database.getMovie(i).getDuration());
+                outputStream.println("");
+                */
+            }
+            inputStream.close ();
         }
         catch (FileNotFoundException e)
         {
@@ -565,12 +581,7 @@ public class Interface {
             System.out.println("|");
             System.out.print("|> ");  
         }
-        while (inputStream.hasNextLine ())
-        {
-            String line = inputStream.nextLine ();
-            System.out.println (line);
-        }
-        inputStream.close ();
+        
         // -----------------------------------------------
     }
      //a method show help text

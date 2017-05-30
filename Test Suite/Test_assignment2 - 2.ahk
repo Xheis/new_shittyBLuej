@@ -71,7 +71,9 @@ Send, 10{enter}	; 10 - Delete Movie
 Sleep, 150   
 Send, 3{enter}	; 3 - Movie 4
 Sleep, 150   
-Send, -1{enter}	; -1 - Exit menu
-
-
+Send, 4{enter}	; 4 - View All Movies
+Sleep, 150   
+Send, 6{enter}	; 6 - View Movies in a playlist
+Sleep, 150   
+Send, 0{enter}	; 0 - View Movies in Playlist1
 Sleep, 150   

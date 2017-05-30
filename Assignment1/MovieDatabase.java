@@ -128,7 +128,7 @@ public class MovieDatabase
 
             if (movieArray[i].getDuration() <= tempRuntime)
             {
-                stringToPrint += "|> " + movieArray[i].getName() +  " - " + Float.toString(movieArray[i].getDuration()) + "\n";
+                stringToPrint += "|> Movie title: " + movieArray[i].getName() +  " - Duration: " + Float.toString(movieArray[i].getDuration()) + "\n";
             }
 
         }

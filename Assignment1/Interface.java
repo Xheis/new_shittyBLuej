@@ -570,7 +570,6 @@ public class Interface {
                 outputStream.println("Director: "       + database.getMovie(i).getDirector());
                 outputStream.println("fileSize: "       + database.getMovie(i).getFileSize());
                 outputStream.println("duration: "       + database.getMovie(i).getDuration());
-                outputStream.println("");
             }
             outputStream.close();
             System.out.println("|");
@@ -601,7 +600,7 @@ public class Interface {
         try
         {
             inputStream = new Scanner (new File (path));
-            while (inputStream.hasNextLine ())
+            while (inputStream.hasNextLine())
             {
                 String tempName,tempDirector;
                 int tempFileSize[] = {0};
@@ -611,14 +610,14 @@ public class Interface {
                 Movie tempMovie;
                 tempMovie = new Movie();
                 //enter Name
-                tempName = inputStream.nextLine ();
+                tempName = inputStream.nextLine();
+                debugPrint("Opened: " + tempName);
                 //enter Director
-                tempDirector = inputStream.nextLine ();
+                tempDirector = inputStream.nextLine();
                 //enter FileSize
-                sanatiseNextIntFromFile(inputStream.nextLine (),tempFileSize);
+                sanatiseNextIntFromFile(inputStream.nextLine(), tempFileSize);
                 //enter Duration
-                sanatiseNextFloatFromFile(inputStream.nextLine (),tempDuration); 
-
+                sanatiseNextFloatFromFile(inputStream.nextLine(), tempDuration); 
                 tempMovie.setName(tempName);
                 tempMovie.setDirector(tempDirector);
                 tempMovie.setFileSize(tempFileSize[0]);

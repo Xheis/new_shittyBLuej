@@ -599,9 +599,11 @@ public class Interface {
         System.out.println ("Reading file " + path +" now...");
         try
         {
+            int i = 0;
             inputStream = new Scanner (new File (path));
             while (inputStream.hasNextLine())
             {
+
                 String tempName,tempDirector,tempFileSize_str,tempDuration_str;
                 int tempFileSize[] = {0};
                 float tempDuration[] = {0};
@@ -611,21 +613,35 @@ public class Interface {
                 tempMovie = new Movie();
                 //enter Name
                 tempName = inputStream.nextLine();
+                if(tempName.equals("\r"))
+                {
+                    //I suspect it was unintentional, but the movieDatabase provided has 3 Carriage Returns at the end.
+                    //call it quits, we're done here.
+                    break;
+                }
+                debugPrint(Integer.toString(i) + ": " + tempName); i++;
                 //trim name
                 tempName = tempName.substring(13);
+
+                if (inputStream.hasNextLine() == false) {debugPrint("NO NEW LINES!");}
+
                 //enter Director
                 tempDirector = inputStream.nextLine();
                 //trim Director
                 tempDirector= tempDirector.substring(10);
 
+                if (inputStream.hasNextLine() == false) {debugPrint("NO NEW LINES!");}
 
                 //enter FileSize
                 tempFileSize_str = inputStream.nextLine();
                 tempFileSize_str = tempFileSize_str.substring(10);
                 sanatiseNextIntFromFile(tempFileSize_str, tempFileSize);
+
+                if (inputStream.hasNextLine() == false) {debugPrint("NO NEW LINES!");}
+
                 //enter Duration
                 tempDuration_str = inputStream.nextLine();
-                tempDuration_str = tempDuration_str.substring(11);
+                tempDuration_str = tempDuration_str.substring(10);
                 sanatiseNextFloatFromFile(tempDuration_str, tempDuration); 
 
                 debugPrint("Opened: " + tempName + " " + tempDirector + " " + Integer.toString(tempFileSize[0]) + " " + Float.toString(tempDuration[0]));
@@ -636,6 +652,9 @@ public class Interface {
 
                 database.addMovie(tempMovie);
                 Movie.numberOfMovies++; //static as requested.
+
+                //discard the new carriage line
+                inputStream.nextLine();
                 }
 
                 System.out.println("|");

@@ -620,11 +620,11 @@ public class Interface {
 
 
                 //enter FileSize
-                tempFileSize_str = inputStream.nextLine()
+                tempFileSize_str = inputStream.nextLine();
                 tempFileSize_str = tempFileSize_str.substring(10);
                 sanatiseNextIntFromFile(tempFileSize_str, tempFileSize);
                 //enter Duration
-                tempDuration_str = inputStream.nextLine()
+                tempDuration_str = inputStream.nextLine();
                 tempDuration_str = tempDuration_str.substring(11);
                 sanatiseNextFloatFromFile(tempDuration_str, tempDuration); 
 

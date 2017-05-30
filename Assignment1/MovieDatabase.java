@@ -174,7 +174,7 @@ public class MovieDatabase
               tempMovieArray[i] = movieArray[i+1];
           }
       }
-      tempMovieArray = movieArray;
+      movieArray = tempMovieArray;
       System.out.println("|> " + tempNameOfMovie + " deleted."); 
       System.out.println("|");
       System.out.print("|> ");     

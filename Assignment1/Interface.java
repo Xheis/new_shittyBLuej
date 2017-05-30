@@ -452,6 +452,7 @@ public class Interface {
             }
         }
         playlistArray = tempPlaylistArray;
+        logicalSize--;
         System.out.println("|> " + tempNameOfPlaylist + " deleted."); 
         System.out.println("|");
         System.out.print("|> ");  

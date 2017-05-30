@@ -41,12 +41,12 @@ public class MovieDatabase
     {
       //Movie[] returnArray = new Movie[array1.length+1];
       //debugPrint("Array1Length: " + Integer.toString(array1.length));
-      for(int i=0; i< array1.length; i++)
+      for(int i=0; i< logicalSize; i++)//array1.length; i++)
       {
         array2[i] = array1[i];
         //debugPrint("Loop count: " + Integer.toString(i) + " Name:" + array2[i].getName()+ " Name2:" + array1[i].getName());
       }
-      array2[array1.length] = newMovie;
+      array2[logicalSize] = newMovie;
       //debugPrint("Loop count END Name:" + array2[array1.length].getName());
     }
 

@@ -613,7 +613,7 @@ public class Interface {
                 tempMovie = new Movie();
                 //enter Name
                 tempName = inputStream.nextLine();
-                if(tempName.equals("\r"))
+                if(tempName.equals(""))
                 {
                     //I suspect it was unintentional, but the movieDatabase provided has 3 Carriage Returns at the end.
                     //call it quits, we're done here.

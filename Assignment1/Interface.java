@@ -602,7 +602,7 @@ public class Interface {
             inputStream = new Scanner (new File (path));
             while (inputStream.hasNextLine())
             {
-                String tempName,tempDirector;
+                String tempName,tempDirector,tempFileSize_str,tempDuration_str;
                 int tempFileSize[] = {0};
                 float tempDuration[] = {0};
 
@@ -611,16 +611,24 @@ public class Interface {
                 tempMovie = new Movie();
                 //enter Name
                 tempName = inputStream.nextLine();
+                //trim name
+                tempName = tempName.substring(13);
                 //enter Director
                 tempDirector = inputStream.nextLine();
+                //trim Director
+                tempDirector= tempDirector.substring(10);
 
 
                 //enter FileSize
-                sanatiseNextIntFromFile(inputStream.nextLine(), tempFileSize);
+                tempFileSize_str = inputStream.nextLine()
+                tempFileSize_str = tempFileSize_str.substring(10);
+                sanatiseNextIntFromFile(tempFileSize_str, tempFileSize);
                 //enter Duration
-                sanatiseNextFloatFromFile(inputStream.nextLine(), tempDuration); 
+                tempDuration_str = inputStream.nextLine()
+                tempDuration_str = tempDuration_str.substring(11);
+                sanatiseNextFloatFromFile(tempDuration_str, tempDuration); 
 
-                debugPrint("Opened: " + tempName + " " + tempDirector + " " + Integer.toString(tempFileSize) + " " + Float.toString(tempDuration));
+                debugPrint("Opened: " + tempName + " " + tempDirector + " " + Integer.toString(tempFileSize[0]) + " " + Float.toString(tempDuration[0]));
                 tempMovie.setName(tempName);
                 tempMovie.setDirector(tempDirector);
                 tempMovie.setFileSize(tempFileSize[0]);

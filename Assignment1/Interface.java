@@ -410,7 +410,7 @@ public class Interface {
         System.out.println("|>> To delete a movie, simply type in their number.");
         do
         {
-            selectedMovie = showNumberedMovies();
+            selectedMovie = showNumberedMoviesInPlaylist(selectedPlaylist);
             if(selectedMovie==-1)
             {
                 break;
